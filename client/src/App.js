@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
+import Header from './Header';
+import LoginRegister from './LoginRegister';
+import JoinCreate from './JoinCreate';
+import Playlist from './Playlist';
 import './App.scss';
+
+const RedirectHome = () => {
+  return (
+    <Redirect to={{
+        pathname: '/',
+    }}/>
+  )
+}
 
 class App extends Component {
   constructor() {
@@ -21,16 +34,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          Hello {this.state.name}!
+      <Router>
+        <div className="App">
+          <Header />
+
+          <Route exact path="/" component={JoinCreate}/>
+          <Route exact path="/login" component={LoginRegister}/>
+          <Route path="/playlist/:id" component={Playlist}/>
+          <Route exact path="/playlist" component={RedirectHome}/>
         </div>
-        <h2>Server</h2>
-        <p>Edit <code>server/api/index.js</code> to return your name and reload this page.</p>
-        <br />
-        <h2>Client</h2>
-        <p>This page lives at <code>client/src/App.js</code></p>
-      </div>
+      </Router>
     );
   }
 }
