@@ -1,0 +1,32 @@
+@import "./variables.scss";
+
+.Header {
+  background-color: $primary;
+  color: white;
+  padding: 15px;
+}
+
+a.logo {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  width: 25%;
+  font-size: 30px;
+}
+
+.nav {
+  text-align: right;
+  position: absolute;
+  right: 5px;
+  top: 24px;
+  display: block;
+  width: 75%;
+
+  a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+}

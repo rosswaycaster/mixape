@@ -4,6 +4,7 @@ import Header from './Header';
 import LoginRegister from './LoginRegister';
 import JoinCreate from './JoinCreate';
 import Playlist from './Playlist';
+
 import './App.scss';
 
 const RedirectHome = () => {
@@ -29,11 +30,12 @@ class App extends Component {
       <Router>
         <div className="App">
           <Header />
-
-          <Route exact path="/" component={JoinCreate}/>
-          <Route exact path="/login" component={LoginRegister}/>
-          <Route path="/playlist/:id" component={Playlist}/>
-          <Route exact path="/playlist" component={RedirectHome}/>
+          <div className="content">
+            <Route exact path="/" component={JoinCreate}/>
+            <Route exact path="/login" component={LoginRegister}/>
+            <Route path="/playlist/:id" component={Playlist}/>
+            <Route exact path="/playlist" component={RedirectHome}/>
+          </div>
         </div>
       </Router>
     );

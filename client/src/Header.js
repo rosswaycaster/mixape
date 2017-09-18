@@ -9,9 +9,11 @@ class Header extends Component {
 
   render() {
     return (
-      <div>Header
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/login">Login / Register</Link></li>
+      <div className="Header">
+        <Link className="logo" to="/">🙉 MixApe</Link>
+        <div className="nav">
+          <Link to="/login">Login / Register</Link>
+        </div>
       </div>
     )
   }
