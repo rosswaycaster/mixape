@@ -1,13 +1,8 @@
 const router = require('express').Router();
+const userRoutes = require('./user');
+const playlistRoutes = require('./playlist');
 
-router.get('/', (req, res) => {
-  res.send('API Server');
-});
-
-router.get('/hello', (req, res) => {
-  res.send({
-    name: 'World'
-  });
-});
+router.use('/user', userRoutes);
+router.use('/playlist', playlistRoutes);
 
 module.exports = router;

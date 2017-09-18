@@ -17,19 +17,11 @@ const RedirectHome = () => {
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      name: ''
-    };
+    this.state = {};
   }
 
   componentWillMount() {
-    fetch('/api/hello')
-      .then(res => res.json())
-      .then(result => {
-        this.setState({
-          name: result.name
-        });
-      });
+
   }
 
   render() {

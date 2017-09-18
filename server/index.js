@@ -1,12 +1,35 @@
 const express = require('express');
-const path = require('path');
-const http = require('http');
-const api = require('./api');
-
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+const path = require('path');
+require('dotenv').config({path:path.join(__dirname, '../.env')});
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const api = require('./api');
+const db = require('./db');
+
+
+app.use(session({
+  secret: 'M1x@p3!',
+  store: new MongoStore({ mongooseConnection: db }),
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
+//Attach socket.io to the request
+app.use(function(req,res,next){
+  req.io = io;
+  next();
+})
+
+//API Routes
 app.use('/api', api);
 
 // The "catchall" handler: for any request that doesn't
@@ -18,6 +41,6 @@ if (!process.env.DEV) {
 }
 
 const port = process.env.PORT || 3001;
-app.listen(port);
+server.listen(port);
 
 console.log(`Server listening on ${port}`);
