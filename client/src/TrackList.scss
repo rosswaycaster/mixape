@@ -1,0 +1,26 @@
+@import './variables.scss';
+
+.TrackList {
+  .result {
+    margin: 10px 0px;
+    background-color: $primary;
+    cursor: pointer;
+
+    .info {
+      display: inline-block;
+      width: calc( 100% - 260px );
+      vertical-align: top;
+      padding: 10px;
+
+      .title {
+        font-weight: bold;
+        font-size: 25px;
+      }
+    }
+
+    img {
+      width: 200px;
+      display: inline-block;
+    }
+  }
+}

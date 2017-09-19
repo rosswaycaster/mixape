@@ -1,5 +1,10 @@
 @import './variables.scss';
 
+.pleaseLogin {
+  color: $text;
+  text-align: center;
+}
+
 .YouTubeSearch {
   input {
     width: calc( 100% - 20px );

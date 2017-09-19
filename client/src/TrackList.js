@@ -17,7 +17,7 @@ class TrackList extends Component {
             console.log(video)
             return (
               <div className="result" key={video.id.videoId}>
-                <img src={video.snippet.thumbnails.default.url} alt={video.snippet.title} />
+                <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
                 <div className="info">
                   <div className="title">{video.snippet.title}</div>
                   <div className="channel">{video.snippet.channelTitle}</div>

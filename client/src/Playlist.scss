@@ -1,4 +1,17 @@
+@import './variables.scss';
+
 .Playlist {
+  h1 {
+    color: $text;
+    margin: 10px 0px;
+  }
+
+  h3{
+    color: lighten($text, 10%);
+    margin: 5px 0px;
+    margin-bottom: 25px;
+  }
+
   .split {
     width: 100%;
 
