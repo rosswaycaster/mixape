@@ -5,13 +5,22 @@ import "./JoinCreate.scss";
 class JoinCreate extends Component {
   constructor() {
     super();
+    this.state = {
+      placeholder: ''
+    }
+  }
+
+  componentWillMount() {
+    fetch('/api/playlist/name')
+      .then(result => result.json())
+      .then(result => this.setState({placeholder: result.name}))
   }
 
   render() {
     return (
       <div className="JoinCreate">
         <div className="wrapper">
-          <input placeholder="hello" type="text"/>
+          <input placeholder={this.state.placeholder} type="text"/>
           <br />
           <button className="join">Join</button>
           <button className="create">Create</button>

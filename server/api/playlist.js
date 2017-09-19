@@ -2,6 +2,30 @@ const router = require('express').Router();
 const Playlist = require('../db/Playlist');
 const Track = require('../db/Track');
 
+const Moniker = require('moniker');
+const names = Moniker.generator([Moniker.verb, Moniker.adjective, Moniker.noun]);
+
+router.get('/name', (req, res) => {
+  function tryName(){
+    const name = names.choose();
+    if (name.length < 18){
+      Playlist.findOne({slug: name})
+      .exec(function(err, playlist) {
+        if (playlist === null) {
+          res.send({name});
+        } else {
+          tryName();
+        }
+      });
+    } else {
+      tryName();
+    }
+  }
+
+  tryName();
+
+});
+
 //Create Playlist
 router.post('/', (req, res) => {
   if (req.session._id) {
