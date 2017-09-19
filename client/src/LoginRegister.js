@@ -42,6 +42,25 @@ class LoginRegister extends Component {
     });
   }
 
+  signupClicked() {
+    axios.post('/api/user/signup', {
+      username: this.refs.username.value,
+      password: this.refs.password.value,
+    }).then((res) => {
+      this.props.UserStore.set(res.data);
+      this.props.history.push('/');
+    }).catch((err) => {
+      console.log(err);
+      if (err.response.status === 401){
+        this.setState({
+          err: err.response.data.err
+        })
+      } else {
+        console.log(err.response)
+      }
+    });
+  }
+
   render() {
     return (
       <div className="LoginRegister">
@@ -50,7 +69,7 @@ class LoginRegister extends Component {
           <input placeholder="username" type="text" ref="username"/>
           <input placeholder="password" type="password" ref="password"/>
           <button className="login" onClick={() => {this.loginClicked()}}>Join</button>
-          <button className="signup">Signup</button>
+          <button className="signup" onClick={() => {this.signupClicked()}}>Signup</button>
         </div>
       </div>
     )
