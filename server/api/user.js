@@ -33,18 +33,21 @@ router.post('/login', (req, res) => {
   User.findOne({
     username: req.body.username
   }, function(err, user) {
-
-    const hash = user.passwordCheck(req.body.password);
-    if (hash){
-      req.session.username = req.body.username;
-      req.session.password = hash;
-      req.session._id = user._id;
-      res.send(sanitizeUser(user));
+    if (user){
+      const hash = user.passwordCheck(req.body.password);
+      if (hash){
+        req.session.username = req.body.username;
+        req.session.password = hash;
+        req.session._id = user._id;
+        res.send(sanitizeUser(user));
+      } else {
+        delete req.session.username;
+        delete req.session.password;
+        delete req.session._id;
+        res.status(401).send({err: 'Incorrect Username/Password.'});
+      }
     } else {
-      delete req.session.username;
-      delete req.session.password;
-      delete req.session._id;
-      res.status(401).send({err: 'Incorrect Username/Password.'});
+      res.status(401).send({err: 'Username does not exist.'});
     }
   });
 });

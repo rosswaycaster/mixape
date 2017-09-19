@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "custom-react-scripts": "0.2.0",
+    "lodash": "^4.17.4",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-player": "^0.24.5",
+    "react-responsive-embed": "^2.0.0",
+    "socket.io": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

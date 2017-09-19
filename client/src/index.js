@@ -1,6 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './App';
+import { Provider } from "mobx-react";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import UserStore from './store/UserStore';
+
+import App from './App';
+import './index.scss';
+
+class Root extends React.Component {
+  render(){
+    return (
+      <Provider UserStore={new UserStore()}>
+        <App />
+      </Provider>
+    )
+  }
+}
+
+ReactDOM.render(<Root />, document.getElementById('root'));

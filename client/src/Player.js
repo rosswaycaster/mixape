@@ -1,17 +1,50 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import "./Player.scss";
+const React = require('react')
+const PropTypes = React.PropTypes
+const div = React.createElement.bind(React, 'div')
+const iframe = React.createElement.bind(React, 'iframe')
 
-class Player extends Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <div>Player</div>
-    )
-  }
+const divStyle = {
+  position: 'relative',
+  height: 0,
+  overflow: 'hidden',
+  maxWidth: '100%'
 }
 
-export default Player;
+const iframeStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%'
+}
+
+/*
+ *  Turn `16:9` into `9 / 16` into `56.25%`
+ *  Turn `4:3` into `3 / 4` into `75%`
+ */
+const ratioToPercent = (ratio) => {
+  const [w, h] = ratio.split(':').map((num) => Number(num))
+  return `${(h / w) * 100}%`
+}
+
+/*
+ *  Usage: <ResponsiveEmbed src='ace youtube video' ratio='4:3' />
+ */
+const ResponsiveEmbed = (props) => {
+  const paddingBottom = ratioToPercent("16:9")
+  const style = Object.assign({}, divStyle, {paddingBottom})
+  const iframeProps = Object.assign({frameBorder: 0}, props, {style: iframeStyle})
+  return div({style},
+    iframe(iframeProps)
+  )
+}
+
+ResponsiveEmbed.defaultProps = {
+  src: 'https://www.youtube.com/embed/dQw4w9WgXcQ'
+}
+
+ResponsiveEmbed.propTypes = {
+  src: PropTypes.string
+}
+
+module.exports = ResponsiveEmbed

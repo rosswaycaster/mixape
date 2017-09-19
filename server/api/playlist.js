@@ -26,7 +26,11 @@ router.get('/name', (req, res) => {
 
 });
 
-//Create Playlist
+/* Create Playlist
+POST {
+  slug: name of playlist
+}
+*/
 router.post('/', (req, res) => {
   if (req.session._id) {
     new Playlist({
@@ -40,7 +44,7 @@ router.post('/', (req, res) => {
       }
     });
   } else {
-    res.status(401).send({err: 'Must be logged in.'})
+    res.status(401).send({err: 'Please login to create a Playlist.'})
   }
 });
 
@@ -62,6 +66,8 @@ router.get('/', (req, res) => {
         if (err) console.log(err)
         res.send({playlist, tracks})
       })
+    } else {
+      res.status(404).send({err:'Playlist does not exist.'});
     }
   });
 });
@@ -74,7 +80,7 @@ router.post('/track', (req, res) => {
       if (err) console.log(err);
       if (playlist) {
         new Track({
-          url: req.body.url,
+          data: req.body.data,
           source: req.body.source,
           owner: req.session._id,
           playlist: playlist._id
@@ -82,6 +88,9 @@ router.post('/track', (req, res) => {
           if (err) {
             res.status(401).send({err: err});
           } else {
+            req.io.emit(playlist.slug, {
+              refresh: true
+            });
             res.send(track);
           }
         });
@@ -95,15 +104,18 @@ router.post('/track', (req, res) => {
 //Delete Track From Playlist
 router.delete('/track', (req, res) => {
   if (req.session._id) {
-    Playlist.findById(req.body.playlist)
+    Playlist.findById(req.query.playlist)
     .populate({path: 'owner', select: '_id'})
     .exec(function(err, playlist) {
       if (err) console.log(err);
       if (playlist && playlist.owner._id == req.session._id) {
-        Track.findById(req.body._id).remove(function(err) {
+        Track.remove({_id: req.query._id},function(err) {
           if (err) {
             res.status(401).send({err: err});
           } else {
+            req.io.emit(playlist.slug, {
+              refresh: true
+            });
             res.send('Successfully Deleted Track.');
           }
         });
