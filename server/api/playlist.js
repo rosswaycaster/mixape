@@ -3,14 +3,14 @@ const Playlist = require('../db/Playlist');
 const Track = require('../db/Track');
 
 //Create Playlist
-router.post('/:slug', (req, res) => {
+router.post('/', (req, res) => {
   if (req.session._id) {
     new Playlist({
-      slug: req.params.slug,
+      slug: req.body.slug,
       owner: req.session._id
     }).save(function(err, playlist) {
       if (err) {
-        res.status(401).send({err: 'Playlist "'+req.params.slug+'" already exists.'});
+        res.status(401).send({err: 'Playlist "'+req.body.slug+'" already exists.'});
       } else {
         res.send(playlist);
       }
@@ -21,9 +21,9 @@ router.post('/:slug', (req, res) => {
 });
 
 //Get Playlist
-router.get('/:slug', (req, res) => {
+router.get('/', (req, res) => {
   Playlist.findOne({
-    slug: req.params.slug
+    slug: req.query.slug
   })
   .populate({path: 'owner', select: '-password'})
   .exec(function(err, playlist) {
@@ -43,11 +43,9 @@ router.get('/:slug', (req, res) => {
 });
 
 //Add Track To Playlist
-router.post('/:slug/track', (req, res) => {
+router.post('/track', (req, res) => {
   if (req.session._id) {
-    Playlist.findOne({
-      slug: req.params.slug
-    })
+    Playlist.findById(req.body.playlist)
     .exec(function(err, playlist) {
       if (err) console.log(err);
       if (playlist) {
@@ -71,11 +69,9 @@ router.post('/:slug/track', (req, res) => {
 });
 
 //Delete Track From Playlist
-router.delete('/:slug/track', (req, res) => {
+router.delete('/track', (req, res) => {
   if (req.session._id) {
-    Playlist.findOne({
-      slug: req.params.slug
-    })
+    Playlist.findById(req.body.playlist)
     .populate({path: 'owner', select: '_id'})
     .exec(function(err, playlist) {
       if (err) console.log(err);

@@ -2,16 +2,17 @@
 
 .Header {
   background-color: $primary;
-  color: white;
+  color: $text;
   padding: 15px;
 }
 
 a.logo {
-  color: white;
+  color: $text;
   text-decoration: none;
   display: inline-block;
   width: 25%;
   font-size: 30px;
+  font-weight: bolder;
 }
 
 .nav {
@@ -23,10 +24,11 @@ a.logo {
   width: 75%;
 
   a {
-    color: white;
+    color: $text;
     text-decoration: none;
     margin: 0 10px;
     font-size: 18px;
     margin-bottom: 10px;
+    font-weight: bold;
   }
 }

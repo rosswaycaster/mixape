@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+@import './variables.scss';
+*{
+  font-family: $font;
+}
+
+body {
+  background-color: $background;
+}
 
 .App {
   .content {
-    padding: 20px;
+    padding: 15px;
   }
 }

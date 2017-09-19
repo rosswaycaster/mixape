@@ -9,7 +9,14 @@ class JoinCreate extends Component {
 
   render() {
     return (
-      <div>JoinCreate</div>
+      <div className="JoinCreate">
+        <div className="wrapper">
+          <input placeholder="hello" type="text"/>
+          <br />
+          <button className="join">Join</button>
+          <button className="create">Create</button>
+        </div>
+      </div>
     )
   }
 }
