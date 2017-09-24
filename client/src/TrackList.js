@@ -14,7 +14,6 @@ class TrackList extends Component {
         {
           this.props.tracks.map((video) => {
             video = JSON.parse(video.data);
-            console.log(video)
             return (
               <div className="result" key={video.id.videoId}>
                 <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
