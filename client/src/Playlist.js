@@ -101,7 +101,7 @@ class Playlist extends Component {
                   <div className="wrapper">
                     <ReactPlayer className="player" controls={true} width='100%' height='100%' url={'https://www.youtube.com/embed/'+this.state.nowPlaying} onEnded={() => {this.playNext()}} playing />
                   </div>
-                ) : null
+                ) : <div className="noTracks">Add a track to begin!</div>
               }
               <TrackList tracks={this.state.tracks} />
             </div>

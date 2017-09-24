@@ -68,7 +68,7 @@ class LoginRegister extends Component {
         <div className="wrapper">
           <input placeholder="username" type="text" ref="username"/>
           <input placeholder="password" type="password" ref="password"/>
-          <button className="login" onClick={() => {this.loginClicked()}}>Join</button>
+          <button className="login" onClick={() => {this.loginClicked()}}>Login</button>
           <button className="signup" onClick={() => {this.signupClicked()}}>Signup</button>
         </div>
       </div>
