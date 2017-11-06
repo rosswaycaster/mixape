@@ -16,10 +16,10 @@
   > "In college we would all fight over what songs to play. MixApe solves that problem by letting anyone add tracks to the playlist." - Ross Waycaster
 
 ## How to Get Started ##
-  > Simply go to http://mixape.com and create a playlist. Then share the playlist url with your friends.
+  > Simply go to https://mixape.herokuapp.com and create a playlist. Then share the playlist url with your friends.
 
 ## Customer Quote ##
   > "Now my friends and I don't fight over the music playlist anymore!" - Some College Kid
 
 ## Give MixApe a go! ##
-  > Next time your have a party remember to use [MixApe](http://mixape.com)!
+  > Next time your have a party remember to use [MixApe](https://mixape.herokuapp.com)!
